@@ -29,7 +29,12 @@ class SearchBar extends StatelessWidget {
                 ),
               ),
             ),
-            Icon(Icons.search),
+            controller.text.length == 0
+                ? Icon(Icons.search)
+                : GestureDetector(
+                    onTap: () => controller.clear(),
+                    child: Icon(Icons.close),
+                  ),
           ],
         ),
       ),
