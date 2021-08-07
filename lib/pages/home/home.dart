@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../core/constants.dart';
 import '../../widgets/search_bar.dart';
 import '../profile.dart';
+import 'main_view.dart';
+import 'search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,14 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _phrase = TextEditingController(); //controls searching
+  final phrase = TextEditingController(); //controls searching
   var _status = homeStatus.main;
-
-  @override
-  void initState() {
-    _phrase.addListener(controllerListener);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +75,12 @@ class _HomePageState extends State<HomePage> {
                 height: 18.0,
               ),
               SearchBar(
-                controller: _phrase,
+                controller: phrase,
               ),
               SizedBox(
                 height: 18.0,
               ),
-              buildHomePage(),
+              _buildHomePage(),
             ],
           ),
         ),
@@ -92,23 +88,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  @override
+  void initState() {
+    phrase.addListener(_controllerListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    phrase.removeListener(_controllerListener);
+    super.dispose();
+  }
+
   //builds bottom part of HomePage depending on if user searches for places or not
-  Widget buildHomePage() {
+  Widget _buildHomePage() {
     switch (_status) {
       case homeStatus.main:
-        return Text("Home");
+        return MainView();
       case homeStatus.searching:
-        return Text("Searching...");
+        return HomeSearch(
+          controller: phrase,
+        );
     }
   }
 
   //sets [_status] of HomePage depending on if user searches for places or not
-  void controllerListener() {
-    if (_phrase.text.length > 0 && _status == homeStatus.main)
+  void _controllerListener() {
+    if (phrase.text.length > 0 && _status == homeStatus.main)
       setState(() {
         _status = homeStatus.searching;
       });
-    else if (_phrase.text.length == 0 && _status == homeStatus.searching)
+    else if (phrase.text.length == 0 && _status == homeStatus.searching)
       setState(() {
         _status = homeStatus.main;
       });
