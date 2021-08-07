@@ -22,7 +22,7 @@ class SearchService {
       List.generate(
         phrase.length,
         (index) => Place(
-          name: "Marcinkowice City",
+          name: "Marcinkowice Hotel",
           description: "JD",
           price: 30,
           photo:

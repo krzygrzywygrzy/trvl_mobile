@@ -30,16 +30,17 @@ class _HomeSearchState extends State<HomeSearch> {
               layout = Text("no results");
             else
               layout = Expanded(
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, index) {
-                    //TODO: fix display bug when keyboard is opened
-                    return Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 12.0),
-                      child: PlaceCard(place: snapshot.data![index]),
-                    );
-                  },
+                child: Container(
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0),
+                        child: PlaceCard(place: snapshot.data![index]),
+                      );
+                    },
+                  ),
                 ),
               );
           } else if (snapshot.hasError) {

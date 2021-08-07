@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/place.dart';
+import '../pages/place.dart';
 
 class PlaceCard extends StatelessWidget {
   const PlaceCard({Key? key, required this.place}) : super(key: key);
@@ -11,7 +12,12 @@ class PlaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //TODO: navigate to PlaceScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlacePage(place: place),
+          ),
+        );
       },
       child: Container(
         height: 180,
@@ -85,7 +91,7 @@ class PlaceCard extends StatelessWidget {
             Positioned(
               top: 10,
               child: Hero(
-                tag: "place_image",
+                tag: "place_image_${place.name}",
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),

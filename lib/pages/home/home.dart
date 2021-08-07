@@ -21,12 +21,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column(
-            children: [
-              SizedBox(height: 12.0,),
-              Row(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 12.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -72,18 +74,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 18.0,
-              ),
-              SearchBar(
+            ),
+            SizedBox(
+              height: 18.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: SearchBar(
                 controller: phrase,
               ),
-              SizedBox(
-                height: 18.0,
-              ),
-              _buildHomePage(),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 18.0,
+            ),
+            _buildHomePage(),
+          ],
         ),
       ),
     );
